@@ -15,7 +15,7 @@ class JWTAuthentication(authentication.BaseAuthentication):
         dt = datetime.now() + timedelta(days=2)
         try:
             payload = jwt.decode(token, settings.JWT_SECRET_KEY, dt)
-            user = User.objects.get(usrename=payload['username'])
+            user = User.objects.get(username=payload['username'])
             return user, token
         except jwt.DecodeError:
             raise exceptions.AuthenticationFailed('Your Token Is Invalid')
