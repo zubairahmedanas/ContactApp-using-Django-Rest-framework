@@ -21,7 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '*z$k(7v8x!@*o#uep(j#a06dm0v1f*$10j0zn2##dkw#8a5l+_'
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -38,8 +37,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'authentication',
-    'contact'
+    'contact',
+    'drf_yasg'
+
 ]
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        "Auth Token eg [Bearer (JWT) ]": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'authentication.backends.JWTAuthentication',
@@ -131,4 +142,3 @@ EMAIL_HOST_PASSWORD = ''
 
 # JWT
 JWT_SECRET_KEY = str(os.environ.get('JWT_SECRET_KEY'))
-
